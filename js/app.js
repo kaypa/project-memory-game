@@ -70,13 +70,20 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+let openCards = [];
+
 function displayCard(card) {
   card.classList.add('show', 'open');
+}
+
+function addCardToOpenList(card) {
+  openCards.push(card);
 }
 
 cardDeck.addEventListener('click', function(evt) {
   if (evt.target.nodeName === 'LI') {
     if (!evt.target.classList.contains('show') && !evt.target.classList.contains('open') && !evt.target.classList.contains('match')) {
+      addCardToOpenList(evt.target);
       displayCard(evt.target);
     }
   }
