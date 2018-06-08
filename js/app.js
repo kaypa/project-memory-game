@@ -101,6 +101,8 @@ modal.addEventListener('click', function(evt) {
     if (evt.target.classList.contains('yes')) {
       modal.style.display = 'none';
       resetGame();
+    } else {
+      modal.style.display = 'none';
     }
   }
 });
