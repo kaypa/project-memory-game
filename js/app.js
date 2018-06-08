@@ -71,8 +71,26 @@ function shuffle(array) {
  */
 
 const stars = document.querySelector('.stars');
+const time = document.querySelector('.time');
+let clickCounter = 0;
 let openCards = [];
 let starsLost = 0;
+let seconds = 0;
+let minutes = 0;
+let timer = 0;
+
+function addTime() {
+  seconds++;
+  if (seconds >= 60) {
+    seconds = 0;
+    minutes++;
+  }
+  time.textContent = `${(minutes ? (minutes > 9 ? minutes : '0' + minutes) : '00')}:${(seconds ? (seconds > 9 ? seconds : '0' + seconds) : '00')}`;
+}
+
+function startTimer() {
+  timer = setInterval(addTime, 1000);
+}
 
 function displayCard(card) {
   card.classList.add('show', 'open');
@@ -99,6 +117,12 @@ function updateMoves() {
 cardDeck.addEventListener('click', function(evt) {
   if (evt.target.nodeName === 'LI') {
     if (!evt.target.classList.contains('show') && !evt.target.classList.contains('open') && !evt.target.classList.contains('match')) {
+      clickCounter++;
+      //Starts timer when first card is clicked
+      if (clickCounter === 1) {
+        startTimer();
+      }
+      
       addCardToOpenList(evt.target);
       displayCard(evt.target);
 
