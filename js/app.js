@@ -80,11 +80,26 @@ function addCardToOpenList(card) {
   openCards.push(card);
 }
 
+function keepCardsOpen(card) {
+  card.classList.add('match');
+  card.classList.remove('show', 'open');
+}
+
 cardDeck.addEventListener('click', function(evt) {
   if (evt.target.nodeName === 'LI') {
     if (!evt.target.classList.contains('show') && !evt.target.classList.contains('open') && !evt.target.classList.contains('match')) {
       addCardToOpenList(evt.target);
       displayCard(evt.target);
+
+      if (openCards.length === 2) {
+        if (openCards[0].dataset.card === openCards[1].dataset.card) {
+          for (const card of openCards) {
+            keepCardsOpen(card);
+          }
+
+          openCards = [];
+        }
+      }
     }
   }
 });
