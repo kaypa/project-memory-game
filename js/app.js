@@ -25,6 +25,24 @@ function generateCard(cardType) {
  *   - add each card's HTML to the page
  */
 
+ const cardDeck = document.querySelector('.deck');
+ const movesCounter = document.querySelector('.moves');
+ let moves = 0;
+
+ function initGame() {
+   const fragment = document.createDocumentFragment();
+   shuffle(cards);
+   for (const card of cards) {
+     const newCard = generateCard(card);
+     fragment.appendChild(newCard);
+   }
+
+   cardDeck.appendChild(fragment);
+   movesCounter.textContent = moves;
+ }
+
+ initGame();
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
