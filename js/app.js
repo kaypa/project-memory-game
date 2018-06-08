@@ -11,6 +11,13 @@
                'fa-bicycle', 'fa-bicycle'
                ];
 
+function generateCard(cardType) {
+  const card = document.createElement('li');
+  card.setAttribute('class', 'card');
+  card.setAttribute('data-card', cardType);
+  card.innerHTML = `<i class='fa ${cardType}'></i>`;
+  return card;
+}
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
