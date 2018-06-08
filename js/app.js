@@ -97,6 +97,11 @@ modal.addEventListener('click', function(evt) {
     if (evt.target.classList.contains('close')) {
       modal.style.display = 'none';
     }
+  } else if (evt.target.nodeName === 'BUTTON') {
+    if (evt.target.classList.contains('yes')) {
+      modal.style.display = 'none';
+      resetGame();
+    }
   }
 });
 
