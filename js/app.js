@@ -85,6 +85,10 @@ function keepCardsOpen(card) {
   card.classList.remove('show', 'open');
 }
 
+function closeCard(card) {
+  card.classList.remove('show', 'open');
+}
+
 cardDeck.addEventListener('click', function(evt) {
   if (evt.target.nodeName === 'LI') {
     if (!evt.target.classList.contains('show') && !evt.target.classList.contains('open') && !evt.target.classList.contains('match')) {
@@ -92,12 +96,22 @@ cardDeck.addEventListener('click', function(evt) {
       displayCard(evt.target);
 
       if (openCards.length === 2) {
+        //Keep cards open if they match
         if (openCards[0].dataset.card === openCards[1].dataset.card) {
           for (const card of openCards) {
             keepCardsOpen(card);
           }
 
           openCards = [];
+        } else {
+          //Close cards if they don't match
+          setTimeout(function() {
+            for (const card of openCards) {
+              closeCard(card);
+            }
+
+            openCards = [];
+          }, 700);
         }
       }
     }
