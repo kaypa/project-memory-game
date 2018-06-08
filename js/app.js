@@ -122,7 +122,7 @@ cardDeck.addEventListener('click', function(evt) {
       if (clickCounter === 1) {
         startTimer();
       }
-      
+
       addCardToOpenList(evt.target);
       displayCard(evt.target);
 
@@ -162,3 +162,29 @@ cardDeck.addEventListener('click', function(evt) {
     }
   }
 });
+
+function generateStar(num) {
+  for (let i = 0; i < num; i++) {
+    const starSymbol = document.createElement('li');
+    starSymbol.innerHTML = '<i class="fa fa-star"></i>';
+    stars.appendChild(starSymbol);
+  }
+}
+
+const reset = document.querySelector('#reset');
+function resetGame() {
+  generateStar(starsLost);
+  starsLost = 0;
+  moves = 0;
+  clickCounter = 0;
+  clearInterval(timer);
+  seconds = 0;
+  minutes = 0;
+  timer = 0;
+  matchedCards = [];
+  time.textContent = '0:00';
+  cardDeck.innerHTML = '';
+  initGame();
+}
+
+reset.addEventListener('click', resetGame);
