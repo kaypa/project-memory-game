@@ -89,6 +89,11 @@ function closeCard(card) {
   card.classList.remove('show', 'open');
 }
 
+function updateMoves() {
+  moves++;
+  movesCounter.textContent = moves;
+}
+
 cardDeck.addEventListener('click', function(evt) {
   if (evt.target.nodeName === 'LI') {
     if (!evt.target.classList.contains('show') && !evt.target.classList.contains('open') && !evt.target.classList.contains('match')) {
@@ -113,6 +118,8 @@ cardDeck.addEventListener('click', function(evt) {
             openCards = [];
           }, 700);
         }
+
+        updateMoves();
       }
     }
   }
