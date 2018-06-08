@@ -108,7 +108,11 @@ h1 {
   margin-left: 1em;
 }
 
-.score-panel .restart {
-    float: right;
-    cursor: pointer;
+#reset {
+  float: right;
+  cursor: pointer;
+  font-size: 10px;
+  padding: 5px 15px;
+  border: solid 2px black;
+  border-radius: 5px;
 }
