@@ -89,6 +89,17 @@ function addTime() {
   time.textContent = `${(minutes ? (minutes > 9 ? minutes : '0' + minutes) : '00')}:${(seconds ? (seconds > 9 ? seconds : '0' + seconds) : '00')}`;
 }
 
+const modal = document.querySelector('#modal');
+const stats = document.querySelector('.stats');
+
+modal.addEventListener('click', function(evt) {
+  if (evt.target.nodeName === 'DIV') {
+    if (evt.target.classList.contains('close')) {
+      modal.style.display = 'none';
+    }
+  }
+});
+
 function startTimer() {
   timer = setInterval(addTime, 1000);
 }
@@ -165,6 +176,8 @@ cardDeck.addEventListener('click', function(evt) {
           //Display message when all cards are matched
           if (matchedCards.length === 16) {
             clearInterval(timer);
+            stats.textContent = `You completed the game in ${time.textContent} with ${moves} moves and ${3 - starsLost} stars remaining.`;
+            modal.style.display = 'block';
           }
         }
       }
