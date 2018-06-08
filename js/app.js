@@ -117,46 +117,48 @@ function updateMoves() {
 cardDeck.addEventListener('click', function(evt) {
   if (evt.target.nodeName === 'LI') {
     if (!evt.target.classList.contains('show') && !evt.target.classList.contains('open') && !evt.target.classList.contains('match')) {
-      clickCounter++;
-      //Starts timer when first card is clicked
-      if (clickCounter === 1) {
-        startTimer();
-      }
+      if (openCards.length < 2) {
+        clickCounter++;
+        //Starts timer when first card is clicked
+        if (clickCounter === 1) {
+          startTimer();
+        }
 
-      addCardToOpenList(evt.target);
-      displayCard(evt.target);
+        addCardToOpenList(evt.target);
+        displayCard(evt.target);
 
-      if (openCards.length === 2) {
-        //Keep cards open if they match
-        if (openCards[0].dataset.card === openCards[1].dataset.card) {
-          for (const card of openCards) {
-            keepCardsOpen(card);
-          }
-
-          openCards = [];
-        } else {
-          //Close cards if they don't match
-          setTimeout(function() {
+        if (openCards.length === 2) {
+          //Keep cards open if they match
+          if (openCards[0].dataset.card === openCards[1].dataset.card) {
             for (const card of openCards) {
-              closeCard(card);
+              keepCardsOpen(card);
             }
 
             openCards = [];
-          }, 700);
-        }
+          } else {
+            //Close cards if they don't match
+            setTimeout(function() {
+              for (const card of openCards) {
+                closeCard(card);
+              }
 
-        updateMoves();
+              openCards = [];
+            }, 700);
+          }
 
-        //A star is lost after a certain number of moves
-        switch (moves) {
-          case 12:
-            stars.removeChild(stars.firstElementChild);
-            starsLost++;
+          updateMoves();
+
+          //A star is lost after a certain number of moves
+          switch (moves) {
+            case 12:
+              stars.removeChild(stars.firstElementChild);
+              starsLost++;
+              break;
+            case 15:
+              stars.removeChild(stars.firstElementChild);
+              starsLost++;
             break;
-          case 15:
-            stars.removeChild(stars.firstElementChild);
-            starsLost++;
-          break;
+          }
         }
       }
     }
