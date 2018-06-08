@@ -74,6 +74,7 @@ const stars = document.querySelector('.stars');
 const time = document.querySelector('.time');
 let clickCounter = 0;
 let openCards = [];
+let matchedCards = [];
 let starsLost = 0;
 let seconds = 0;
 let minutes = 0;
@@ -132,6 +133,7 @@ cardDeck.addEventListener('click', function(evt) {
           if (openCards[0].dataset.card === openCards[1].dataset.card) {
             for (const card of openCards) {
               keepCardsOpen(card);
+              matchedCards.push(card);
             }
 
             openCards = [];
@@ -158,6 +160,11 @@ cardDeck.addEventListener('click', function(evt) {
               stars.removeChild(stars.firstElementChild);
               starsLost++;
             break;
+          }
+
+          //Display message when all cards are matched
+          if (matchedCards.length === 16) {
+            clearInterval(timer);
           }
         }
       }
