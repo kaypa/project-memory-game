@@ -70,7 +70,9 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+const stars = document.querySelector('.stars');
 let openCards = [];
+let starsLost = 0;
 
 function displayCard(card) {
   card.classList.add('show', 'open');
@@ -120,6 +122,18 @@ cardDeck.addEventListener('click', function(evt) {
         }
 
         updateMoves();
+
+        //A star is lost after a certain number of moves
+        switch (moves) {
+          case 12:
+            stars.removeChild(stars.firstElementChild);
+            starsLost++;
+            break;
+          case 15:
+            stars.removeChild(stars.firstElementChild);
+            starsLost++;
+          break;
+        }
       }
     }
   }
